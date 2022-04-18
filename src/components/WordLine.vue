@@ -1,6 +1,7 @@
 <script>
 import { store } from '../store.js'
 import WordLetter from './WordLetter.vue'
+import dictionary from '../assets/dictionary.json'
 
 export default {
 
@@ -12,20 +13,14 @@ export default {
     return {
       word: store.state.word,
       currentLetterIndex: 0,
-      wordLineValue: []
+      wordLineValue: [],
+      dictionary: dictionary
     }
   },
 
   mounted() {
 
-    for(var i = 0; i < 5; i++)
-    {
-      this.wordLineValue.push({
-        index: i,
-        value: " ",
-        class: "none"
-      })
-    }
+    this.resetWord();
   },
 
   emits: ['checkWord', 'letterCorrect', 'letterMisaligned', 'letterBad'],
@@ -57,10 +52,36 @@ export default {
       this.currentLetterIndex++;
     },
 
+    resetWord() {
+      this.wordLineValue = [];
+      for(var i = 0; i < 5; i++)
+      {
+        this.wordLineValue.push({
+          index: i,
+          value: " ",
+          class: "letterUnset"
+        })
+      }
+      this.currentLetterIndex = 0;
+    },
+
     
     checkWord() {
 
       // word checking logic
+      var mergedWord = "";
+      this.wordLineValue.forEach(function(item) {
+        mergedWord += item.value;
+      })
+      
+      if(!dictionary.includes(mergedWord))
+      {
+        // doesn't exist
+        this.resetWord();
+        return;
+      }
+
+
       var that = this;
       this.wordLineValue.forEach(function(item) {
         

@@ -103,7 +103,11 @@ export default {
 }
 
 .letterBad { 
-    background-color: lightgrey !important;;
+    background-color: lightgrey !important;
+}
+
+.letterUnset {
+  background-color: white !important;
 }
 </style>
 
