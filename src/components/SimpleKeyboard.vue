@@ -33,7 +33,7 @@ export default {
       },
       display: {
           '{enter}': "ENTER",
-          '{bksp}': "<"
+          '{bksp}': "⌫"
       },
       disableButtonHold: true,
       physicalKeyboardHighlight: true,
