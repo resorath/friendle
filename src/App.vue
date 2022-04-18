@@ -3,7 +3,7 @@ import WordLine from './components/WordLine.vue'
 import SimpleKeyboard from './components/SimpleKeyboard.vue'
 import VictoryAnimation from './components/VictoryAnimation.vue'
 import FriendLink from './components/FriendLink.vue'
-import dictionary from './assets/dictionary.json'
+import goodwords from './assets/goodwords.json'
 import { store } from './store.js'
 
 export default {
@@ -34,7 +34,7 @@ export default {
   },
 
   mounted() {
-    var count = dictionary.length;
+    var count = goodwords.length;
     console.log("Loaded " + count + " words");
     this.store.commit('setDictionarySize', count);
 
@@ -55,7 +55,7 @@ export default {
 
     setWordFromIndex(index) {
 
-      this.store.commit('setWord', dictionary[index]);
+      this.store.commit('setWord', goodwords[index]);
       this.store.commit('setWordIndex', index);
 
       console.log("Word is: " + this.store.state.word)
