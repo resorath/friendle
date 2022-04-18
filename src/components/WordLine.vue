@@ -33,7 +33,7 @@ export default {
   methods: {
     changeNextLetter(letter) {
 
-      if(this.currentLetterIndex >= 0 && (letter == "Backspace" || letter == "{bksp}"))
+      if(this.currentLetterIndex > 0 && (letter == "Backspace" || letter == "{bksp}"))
       {
         this.currentLetterIndex--;
         this.wordLineValue[this.currentLetterIndex].value = ' ';
