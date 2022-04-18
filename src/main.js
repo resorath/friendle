@@ -7,6 +7,4 @@ const app = createApp(App)
 
 app.use(store)
 
-store.commit('setWord', 'stack')
-
 app.mount('#app')

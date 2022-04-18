@@ -9,12 +9,18 @@ export const store = createStore({
   state () {
     return {
       word: null,
+      wordIndex: 0,
+      dictionarySize: 0,
       guesses: []
     }
   },
   mutations: {
     setWord (state, word) {
-      state.word = word
+      state.word = word;
+    },
+
+    setWordIndex(state, index) {
+        state.wordIndex = index;
     },
 
     addGuess (state, guess) {
@@ -23,6 +29,10 @@ export const store = createStore({
 
     clearGuesses (state) {
         state.guesses = []
+    },
+
+    setDictionarySize(state, size) {
+      state.dictionarySize = size;
     }
   }
 })

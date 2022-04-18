@@ -51,6 +51,12 @@ export default {
         console.log(keys);
         console.log(theme);
         this.keyboard.addButtonTheme(keys, theme);
+    },
+    resetKeyboard() {
+        var that = this;
+        this.keyboard.recurseButtons(function(b) {
+            that.keyboard.removeButtonTheme(b.dataset.skbtn, 'keyCorrect keyMisaligned keyBad')
+        })
     }
   },
   watch: {
