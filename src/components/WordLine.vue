@@ -14,7 +14,8 @@ export default {
       word: store.state.word,
       currentLetterIndex: 0,
       wordLineValue: [],
-      dictionary: dictionary
+      dictionary: dictionary,
+      currentClass: ''
     }
   },
 
@@ -77,6 +78,7 @@ export default {
       if(!dictionary.includes(mergedWord))
       {
         // doesn't exist
+        this.shake();
         this.resetWord();
         return;
       }
@@ -112,10 +114,18 @@ export default {
 
 
       this.$emit('checkWord', this.wordLineValue);
+    },
+
+    
+    shake() {
+      this.currentClass = 'shake';
+      var that = this;
+      window.setTimeout(function() {
+        that.currentClass = '';
+      }, 500);
     }
 
   },
-
 
 
 
@@ -125,11 +135,35 @@ export default {
 </script>
 
 <style>
+  @keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
 
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
+
+  
+.shake {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
 </style>
 
 <template>
-    <div>
-      <WordLetter v-for="item in wordLineValue" :key="item.index" :content="item.value" :class="item.class" ref="letterRef" />
+    <div :class="currentClass">
+      <WordLetter v-for="item in wordLineValue" :key="item.index" :content="item.value" :class="item.class" />
     </div>
 </template>

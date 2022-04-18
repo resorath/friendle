@@ -1,6 +1,7 @@
 <script>
 import WordLine from './components/WordLine.vue'
 import SimpleKeyboard from './components/SimpleKeyboard.vue'
+import { store } from './store.js'
 
 export default {
   name: 'App',
@@ -13,7 +14,9 @@ export default {
     return {
       input: "",
       currentWordLineIndex: 0,
-      correctLetters: 0
+      correctLetters: 0,
+      gameOver: false,
+      store: store
     }
   },
 
@@ -26,13 +29,20 @@ export default {
   methods: {
 
     onKeyPress(button) {
-      this.$refs.wl[this.currentWordLineIndex].changeNextLetter(button);
+      if(!this.gameOver)
+        this.$refs.wl[this.currentWordLineIndex].changeNextLetter(button);
     },
 
     checkWord(word) {
 
-      if(this.correctLetters == 5)
+      var mergedWord = "";
+      word.forEach(function(item) {
+        mergedWord += item.value;
+      })
+
+      if(this.store.state.word == mergedWord)
       {
+        console.log("WIN!@")
         this.win();
         return;
       }
@@ -61,11 +71,11 @@ export default {
     },
 
     win() {
-      alert("yay");
+      this.gameOver = true;
     },
 
     lose() {
-      alert(" oh no !");
+      this.gameOver = true;
     }
 
 
@@ -112,6 +122,8 @@ export default {
   100% { transform: rotateX(0deg); background-color: lightgrey;}
 }
 
+
+
 .letterCorrect {
     -webkit-animation: flip-correct 0.8s;
     -webkit-animation-fill-mode: forwards;
@@ -134,27 +146,29 @@ export default {
 }
 
 .keyCorrect {
-  background-color: lime;
+  background-color: lime !important;
 }
 
 .keyMisaligned {
-  background-color: yellow;
+  background-color: yellow !important;
 }
 
 .keyBad { 
-  background-color: lightgrey;
+  background-color: lightgrey !important;
 }
 
 .letterUnset {
   background-color: white !important;
 }
 
+
+
 </style>
 
 <template>
   <div id="app" class="container">
     <h1>Friendle</h1>
-    <WordLine v-for="n in 6" class="WordLine" ref="wl" :key="n"  @checkWord="checkWord" @letterCorrect="letterCorrect" @letterMisaligned="letterMisaligned" @letterBad="letterBad"/>
+    <WordLine v-for="n in 6" class="WordLine" ref="wl" :key="n" @checkWord="checkWord" @letterCorrect="letterCorrect" @letterMisaligned="letterMisaligned" @letterBad="letterBad"/>
     
     <SimpleKeyboard class="SimpleKeyboard" @onChange="onChange" @onKeyPress="onKeyPress" :input="input" ref="kb"/>
   </div>
