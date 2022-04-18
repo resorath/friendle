@@ -82,10 +82,14 @@ export default {
 
     #enterFriendCode {
         margin-top: 40px;
+        display: block;
+        width: 100%;
     }
 
     #enterFriendCodeInput {
-        -moz-appearance:textfield
+        -moz-appearance:textfield;
+        width: 40%;
+        display: inline-block;
     }
     #enterFriendCodeInput::-webkit-outer-spin-button,
     #enterFriendCodeInput::-webkit-inner-spin-button {
@@ -94,6 +98,9 @@ export default {
     }
 
     #cancel {
+        display: block;
+        margin: 0 auto;
+        
         margin-top: 40px;
     }
 
@@ -102,12 +109,13 @@ export default {
 </style>
 
 <template>
-  <i class="fa-solid fa-user" @click="friendInteraction" style="cursor: pointer;"></i>
+  <i class="fa-solid fa-gear" @click="friendInteraction" style="cursor: pointer;"></i>
   <div id="friendLink" v-if="modalUp">
       <h2>Play with a friend!</h2>
       <p id="currentGameCode">Current game code: {{store.state.wordIndex}}</p>
       <button id="newGameCode" @click="newRandomGameCode">New random game code</button>
-      <p id="enterFriendCode">Enter friend's game code: <input id="enterFriendCodeInput" type="number" v-model="friendsGameCode" onkeypress="return /[0-9]/i.test(event.key)"><button @click="startFriendGame">Go!</button></p>
+      <p id="enterFriendCode">Enter friend's game code: </p>
+      <input id="enterFriendCodeInput" type="number" v-model="friendsGameCode" onkeypress="return /[0-9]/i.test(event.key)"><button @click="startFriendGame">Go!</button>
     <button id="cancel" @click="closeModal">Cancel</button>
   </div>
 </template>

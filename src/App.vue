@@ -195,16 +195,20 @@ export default {
     animation-fill-mode: forwards;
 }
 
-.keyCorrect {
-  background-color: lime !important;
+
+
+.keyBad { 
+  background-color: lightgrey !important;
 }
 
 .keyMisaligned {
   background-color: yellow !important;
 }
 
-.keyBad { 
-  background-color: lightgrey !important;
+
+
+.keyCorrect {
+  background-color: lime !important;
 }
 
 .letterUnset {
