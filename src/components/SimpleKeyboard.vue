@@ -46,7 +46,11 @@ export default {
     },
     onKeyPress(button) {
       this.$emit("onKeyPress", button);
-
+    },
+    addButtonTheme(keys, theme) {
+        console.log(keys);
+        console.log(theme);
+        this.keyboard.addButtonTheme(keys, theme);
     }
   },
   watch: {
@@ -58,5 +62,5 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 </style>

@@ -15,7 +15,6 @@ export default {
   props: ['content'],
 
   mounted() {
-    console.log(store);
   },
 
   watch: {

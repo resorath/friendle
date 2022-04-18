@@ -12,15 +12,23 @@ export default {
     return {
       word: store.state.word,
       currentLetterIndex: 0,
-      wordLineValue: [' ',' ',' ',' ',' ']
+      wordLineValue: []
     }
   },
 
   mounted() {
-    console.log(store);
+
+    for(var i = 0; i < 5; i++)
+    {
+      this.wordLineValue.push({
+        index: i,
+        value: " ",
+        class: "none"
+      })
+    }
   },
 
-  emits: ['checkWord'],
+  emits: ['checkWord', 'letterCorrect', 'letterMisaligned', 'letterBad'],
 
   methods: {
     changeNextLetter(letter) {
@@ -28,7 +36,7 @@ export default {
       if(this.currentLetterIndex >= 0 && (letter == "Backspace" || letter == "{bksp}"))
       {
         this.currentLetterIndex--;
-        this.wordLineValue[this.currentLetterIndex] = ' ';
+        this.wordLineValue[this.currentLetterIndex].value = ' ';
         return;
       }
 
@@ -45,12 +53,40 @@ export default {
       if(!validLetters.includes(letter))
         return;
       
-      this.wordLineValue[this.currentLetterIndex] = letter;
+      this.wordLineValue[this.currentLetterIndex].value = letter;
       this.currentLetterIndex++;
     },
 
     
     checkWord() {
+
+      // word checking logic
+      var that = this;
+      this.wordLineValue.forEach(function(item) {
+        
+        if(item.value == store.state.word[item.index])
+        {
+          that.wordLineValue[item.index].class = "letterCorrect"
+
+          that.$emit('letterCorrect', item.index, item.value);
+        }
+        else if(store.state.word.includes(item.value))
+        {
+          that.wordLineValue[item.index].class = "letterMisaligned"
+
+          that.$emit('letterMisaligned', item.index, item.value);
+        }
+        else
+        {
+          that.wordLineValue[item.index].class = "letterBad"
+        
+          that.$emit('letterBad', item.index, item.value);
+
+        }
+
+      });
+
+
       this.$emit('checkWord', this.wordLineValue);
     }
 
@@ -70,6 +106,6 @@ export default {
 
 <template>
     <div>
-      <WordLetter v-for="(item, index) in wordLineValue" :key="index" :content="item" />
+      <WordLetter v-for="item in wordLineValue" :key="item.index" :content="item.value" :class="item.class" ref="letterRef" />
     </div>
 </template>
