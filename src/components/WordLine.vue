@@ -73,7 +73,7 @@ export default {
       this.wordLineValue.forEach(function(item) {
         mergedWord += item.value;
       })
-      
+
       if(!dictionary.includes(mergedWord))
       {
         // doesn't exist
@@ -84,26 +84,29 @@ export default {
 
       var that = this;
       this.wordLineValue.forEach(function(item) {
+
+        window.setTimeout(function() {
         
-        if(item.value == store.state.word[item.index])
-        {
-          that.wordLineValue[item.index].class = "letterCorrect"
+          if(item.value == store.state.word[item.index])
+          {
+            that.wordLineValue[item.index].class = "letterCorrect"
 
-          that.$emit('letterCorrect', item.index, item.value);
-        }
-        else if(store.state.word.includes(item.value))
-        {
-          that.wordLineValue[item.index].class = "letterMisaligned"
+            that.$emit('letterCorrect', item.index, item.value);
+          }
+          else if(store.state.word.includes(item.value))
+          {
+            that.wordLineValue[item.index].class = "letterMisaligned"
 
-          that.$emit('letterMisaligned', item.index, item.value);
-        }
-        else
-        {
-          that.wordLineValue[item.index].class = "letterBad"
-        
-          that.$emit('letterBad', item.index, item.value);
+            that.$emit('letterMisaligned', item.index, item.value);
+          }
+          else
+          {
+            that.wordLineValue[item.index].class = "letterBad"
+          
+            that.$emit('letterBad', item.index, item.value);
+          }
+        }, 200 * item.index)
 
-        }
 
       });
 

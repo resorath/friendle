@@ -40,6 +40,7 @@ export default {
         text-align: center;
         text-transform: uppercase;
         vertical-align: top;
+        transition: transform 0.8s;
     }
 </style>
 

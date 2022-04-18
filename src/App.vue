@@ -48,16 +48,16 @@ export default {
     },
 
     letterCorrect(index, letter) {
-      this.$refs.kb.addButtonTheme(letter, 'letterCorrect');
+      this.$refs.kb.addButtonTheme(letter, 'keyCorrect');
       this.correctLetters++;
     },
 
     letterMisaligned(index, letter) {
-      this.$refs.kb.addButtonTheme(letter, 'letterMisaligned');
+      this.$refs.kb.addButtonTheme(letter, 'keyMisaligned');
     },
 
     letterBad(index, letter) {
-      this.$refs.kb.addButtonTheme(letter, 'letterBad');
+      this.$refs.kb.addButtonTheme(letter, 'keyBad');
     },
 
     win() {
@@ -94,21 +94,61 @@ export default {
   margin: 0 auto;
 }
 
+@keyframes flip-correct {
+  0% { transform: rotateX(0deg); background-color: white; }
+  50% { transform: rotateX(90deg); background-color: white; }
+  100% { transform: rotateX(0deg); background-color: lime;}
+}
+
+@keyframes flip-misaligned {
+  0% { transform: rotateX(0deg); background-color: white; }
+  50% { transform: rotateX(90deg); background-color: white; }
+  100% { transform: rotateX(0deg); background-color: yellow;}
+}
+
+@keyframes flip-bad {
+  0% { transform: rotateX(0deg); background-color: white; }
+  50% { transform: rotateX(90deg); background-color: white; }
+  100% { transform: rotateX(0deg); background-color: lightgrey;}
+}
+
 .letterCorrect {
-    background-color: lime !important;
+    -webkit-animation: flip-correct 0.8s;
+    -webkit-animation-fill-mode: forwards;
+    animation: flip-correct 0.8s;
+    animation-fill-mode: forwards;
 }
 
 .letterMisaligned {
-    background-color: yellow !important;
+    -webkit-animation: flip-misaligned 0.8s;
+    -webkit-animation-fill-mode: forwards;
+    animation: flip-misaligned 0.8s;
+    animation-fill-mode: forwards;
 }
 
 .letterBad { 
-    background-color: lightgrey !important;
+    -webkit-animation: flip-bad 0.8s;
+    -webkit-animation-fill-mode: forwards;
+    animation: flip-bad 0.8s;
+    animation-fill-mode: forwards;
+}
+
+.keyCorrect {
+  background-color: lime;
+}
+
+.keyMisaligned {
+  background-color: yellow;
+}
+
+.keyBad { 
+  background-color: lightgrey;
 }
 
 .letterUnset {
   background-color: white !important;
 }
+
 </style>
 
 <template>
