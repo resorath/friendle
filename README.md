@@ -1,6 +1,15 @@
 # friendle
 
+Clean room clone of a certain word game
+Created to be played with friends
+
+Play at https://friendle.tophatandmonocle.com
+
 ## Project setup
+
+Based on Vue.JS
+
+### Install dependencies
 ```
 npm install
 ```
@@ -19,6 +28,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
