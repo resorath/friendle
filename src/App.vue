@@ -172,45 +172,6 @@ export default {
   100% { transform: rotateX(0deg); background-color: lightgrey;}
 }
 
-
-
-.letterCorrect {
-    -webkit-animation: flip-correct 0.8s;
-    -webkit-animation-fill-mode: forwards;
-    animation: flip-correct 0.8s;
-    animation-fill-mode: forwards;
-}
-
-.letterMisaligned {
-    -webkit-animation: flip-misaligned 0.8s;
-    -webkit-animation-fill-mode: forwards;
-    animation: flip-misaligned 0.8s;
-    animation-fill-mode: forwards;
-}
-
-.letterBad { 
-    -webkit-animation: flip-bad 0.8s;
-    -webkit-animation-fill-mode: forwards;
-    animation: flip-bad 0.8s;
-    animation-fill-mode: forwards;
-}
-
-
-
-.keyBad { 
-  background-color: lightgrey !important;
-}
-
-.keyMisaligned {
-  background-color: yellow !important;
-}
-
-
-
-.keyCorrect {
-  background-color: lime !important;
-}
-
 .letterUnset {
   background-color: white !important;
 }

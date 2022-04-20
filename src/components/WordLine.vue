@@ -164,6 +164,6 @@ export default {
 
 <template>
     <div :class="currentClass">
-      <WordLetter v-for="item in wordLineValue" :key="item.index" :content="item.value" :class="item.class" />
+      <WordLetter v-for="item in wordLineValue" :key="item.index" :content="item.value" :letterClass="item.class" />
     </div>
 </template>
